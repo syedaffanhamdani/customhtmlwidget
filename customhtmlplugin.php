@@ -3,6 +3,7 @@
 Plugin Name: Custom HTML Plugin
 Description: This plugin allows you to place custom HTML in any place you want in your site
 Author: Syed Affan Hamdani
+Website: www.affanhamdani.me
 */
 /*  Functions Start*/
 // Register and load the widget
@@ -46,9 +47,11 @@ class custom_html_widget extends WP_Widget {
     public function form( $instance ) {
     if ( isset( $instance[ 'title' ] ) ) {
     $title = $instance[ 'title' ];
+    $text = $instance['text'];
+
     }
     else {
-    $title = __( 'New title', 'affanhamdani.me' );
+    $title = __( 'New Title', 'affanhamdani.me' );
     }
     // Widget admin form
      
@@ -56,11 +59,11 @@ class custom_html_widget extends WP_Widget {
          
     // Updating widget replacing old instances with new
     public function update( $new_instance, $old_instance ) {
-    $instance = array();
-    $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-    return $instance;
-    }
-    } // Class wpb_widget ends here
+        $instance = $old_instance;
+        $instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
+        return $instance;
+        }
+} // Class ends here
 
 /* Stop Adding Functions Below this Line */
 ?>
